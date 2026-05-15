@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KiddoShop - Kids Fashion Store</title>
+ 
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+ 
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+ 
+    body{
+      background:#fff7f5;
+      color:#333;
+    }
+ 
+    /* Navbar */
+    nav{
+      width:100%;
+      padding:18px 8%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:white;
+      position:sticky;
+      top:0;
+      z-index:1000;
+      box-shadow:0 2px 15px rgba(0,0,0,0.08);
+    }
+ 
+    .logo{
+      font-size:30px;
+      font-weight:700;
+      color:#ff4d6d;
+    }
+ 
+    nav ul{
+      display:flex;
+      list-style:none;
+      gap:25px;
+    }
+ 
+    nav ul li a{
+      text-decoration:none;
+      color:#333;
+      font-weight:500;
+      transition:0.3s;
+    }
+ 
+    nav ul li a:hover{
+      color:#ff4d6d;
+    }
+ 
+    .cart-btn{
+      background:#ff4d6d;
+      color:white;
+      padding:10px 20px;
+      border:none;
+      border-radius:30px;
+      cursor:pointer;
+      font-weight:600;
+      transition:0.3s;
+    }
+ 
+    .cart-btn:hover{
+      background:#e63b5c;
+      transform:translateY(-2px);
+    }
+ 
+    /* Hero Section */
+    .hero{
+      min-height:90vh;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:50px 8%;
+      background:linear-gradient(135deg,#ffe0ec,#fff4d6);
+      flex-wrap:wrap;
+    }
+ 
+    .hero-text{
+      max-width:550px;
+    }
+ 
+    .hero-text h1{
+      font-size:60px;
+      line-height:1.2;
+      margin-bottom:20px;
+      color:#222;
+    }
+ 
+    .hero-text span{
+      color:#ff4d6d;
+    }
+ 
+    .hero-text p{
+      font-size:18px;
+      margin-bottom:30px;
+      color:#555;
+    }
+ 
+    .shop-btn{
+      display:inline-block;
+      padding:15px 35px;
+      background:#ff4d6d;
+      color:white;
+      text-decoration:none;
+      border-radius:40px;
+      font-weight:600;
+      transition:0.3s;
+      box-shadow:0 10px 20px rgba(255,77,109,0.3);
+    }
+ 
+    .shop-btn:hover{
+      transform:translateY(-5px);
+    }
+ 
+    .hero img{
+      width:450px;
+      max-width:100%;
+      animation:float 3s ease-in-out infinite;
+    }
+ 
+    @keyframes float{
+      0%,100%{
+        transform:translateY(0);
+      }
+      50%{
+        transform:translateY(-15px);
+      }
+    }
+ 
+    /* Categories */
+    .section-title{
+      text-align:center;
+      font-size:40px;
+      margin:70px 0 40px;
+      color:#333;
+    }
+ 
+    .categories{
+      padding:0 8% 70px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:25px;
+    }
+ 
+    .category-card{
+      background:white;
+      padding:35px 20px;
+      border-radius:25px;
+      text-align:center;
+      box-shadow:0 5px 20px rgba(0,0,0,0.08);
+      transition:0.4s;
+    }
+ 
+    .category-card:hover{
+      transform:translateY(-10px);
+    }
+ 
+    .category-card img{
+      width:120px;
+      margin-bottom:20px;
+    }
+ 
+    .category-card h3{
+      margin-bottom:10px;
+      color:#ff4d6d;
+    }
+ 
+    /* Products */
+    .products{
+      padding:0 8% 80px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px;
+    }
+ 
+    .product-card{
+      background:white;
+      border-radius:25px;
+      overflow:hidden;
+      box-shadow:0 5px 20px rgba(0,0,0,0.08);
+      transition:0.4s;
+    }
+ 
+    .product-card:hover{
+      transform:translateY(-10px);
+    }
+ 
+    .product-card img{
+      width:100%;
+      height:250px;
+      object-fit:cover;
+    }
+ 
+    .product-info{
+      padding:20px;
+    }
+ 
+    .product-info h3{
+      margin-bottom:10px;
+    }
+ 
+    .price{
+      color:#ff4d6d;
+      font-size:22px;
+      font-weight:700;
+      margin-bottom:15px;
+    }
+ 
+    .buy-btn{
+      width:100%;
+      padding:12px;
+      border:none;
+      background:#ff4d6d;
+      color:white;
+      border-radius:15px;
+      cursor:pointer;
+      font-weight:600;
+      transition:0.3s;
+    }
+ 
+    .buy-btn:hover{
+      background:#e63b5c;
+    }
+ 
+    /* Newsletter */
+    .newsletter{
+      margin:0 8% 80px;
+      padding:50px;
+      border-radius:30px;
+      background:linear-gradient(135deg,#ff4d6d,#ff8fab);
+      color:white;
+      text-align:center;
+    }
+ 
+    .newsletter h2{
+      font-size:40px;
+      margin-bottom:15px;
+    }
+ 
+    .newsletter input{
+      width:300px;
+      max-width:100%;
+      padding:15px;
+      border:none;
+      border-radius:30px;
+      margin-top:20px;
+      outline:none;
+    }
+ 
+    .newsletter button{
+      padding:15px 25px;
+      border:none;
+      border-radius:30px;
+      margin-left:10px;
+      background:#222;
+      color:white;
+      cursor:pointer;
+      font-weight:600;
+    }
+ 
+    footer{
+      text-align:center;
+      padding:30px;
+      background:#fff;
+      color:#777;
+      border-top:1px solid #eee;
+    }
+ 
+    @media(max-width:768px){
+ 
+      .hero{
+        text-align:center;
+        justify-content:center;
+      }
+ 
+      .hero-text h1{
+        font-size:42px;
+      }
+ 
+      nav ul{
+        display:none;
+      }
+ 
+      .newsletter button{
+        margin-top:15px;
+        margin-left:0;
+      }
+    }
+ 
+  </style>
+</head>
+ 
+<body>
+ 
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">KiddoShop</div>
+ 
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Boys</a></li>
+      <li><a href="#">Girls</a></li>
+      <li><a href="#">Toys</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+ 
+    <button class="cart-btn">🛒 Cart</button>
+  </nav>
+ 
+  <!-- Hero -->
+  <section class="hero">
+ 
+    <div class="hero-text">
+      <h1>Fashion For <span>Happy Kids</span></h1>
+ 
+      <p>
+        Explore trendy clothes, toys, shoes and accessories specially designed for kids.
+      </p>
+ 
+      <a href="#" class="shop-btn">Shop Now</a>
+    </div>
+ 
+    <img src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?q=80&w=1000&auto=format&fit=crop" alt="Kids Fashion">
+ 
+  </section>
+ 
+  <!-- Categories -->
+  <h2 class="section-title">Shop Categories</h2>
+ 
+  <section class="categories">
+ 
+    <div class="category-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/892/892458.png">
+      <h3>Boys Wear</h3>
+      <p>Stylish outfits for boys</p>
+    </div>
+ 
+    <div class="category-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png">
+      <h3>Girls Wear</h3>
+      <p>Cute dresses & fashion</p>
+    </div>
+ 
+    <div class="category-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png">
+      <h3>Toys</h3>
+      <p>Fun and educational toys</p>
+    </div>
+ 
+    <div class="category-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/2331/2331970.png">
+      <h3>Footwear</h3>
+      <p>Comfortable kids shoes</p>
+    </div>
+ 
+  </section>
+ 
+  <!-- Products -->
+  <h2 class="section-title">Trending Products</h2>
+ 
+  <section class="products">
+ 
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?q=80&w=1000&auto=format&fit=crop">
+ 
+      <div class="product-info">
+        <h3>Kids Hoodie</h3>
+        <div class="price">₹999</div>
+        <button class="buy-btn">Add to Cart</button>
+      </div>
+    </div>
+ 
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000&auto=format&fit=crop">
+ 
+      <div class="product-info">
+        <h3>Girls Party Dress</h3>
+        <div class="price">₹1499</div>
+        <button class="buy-btn">Add to Cart</button>
+      </div>
+    </div>
+ 
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1515488764276-beab7607c1e6?q=80&w=1000&auto=format&fit=crop">
+ 
+      <div class="product-info">
+        <h3>Kids Sneakers</h3>
+        <div class="price">₹1299</div>
+        <button class="buy-btn">Add to Cart</button>
+      </div>
+    </div>
+ 
+  </section>
+ 
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <h2>Get 20% Off Your First Order</h2>
+    <p>Subscribe to receive latest offers and updates.</p>
+ 
+    <input type="email" placeholder="Enter your email">
+    <button>Subscribe</button>
+  </section>
+ 
+  <!-- Footer -->
+  <footer>
+    © 2026 KiddoShop | Designed with ❤️
+  </footer>
+ 
+</body>
+</html>
+ 
+ 
