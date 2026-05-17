@@ -138,7 +138,7 @@ function placeOrder(){
 }
 </script>
 <script>
-window.onload = function() {
+window.onload = function () {
 
     const params = new URLSearchParams(window.location.search);
     const item = params.get("item");
@@ -148,17 +148,19 @@ window.onload = function() {
             name: "Kids Hoodie",
             price: "₹999"
         },
+
         dress: {
             name: "Girls Dress",
             price: "₹1499"
         },
+
         shoes: {
             name: "Kids Shoes",
             price: "₹1999"
         }
     };
 
-    if(products[item]) {
+    if (products[item]) {
 
         document.getElementById("cartItem").innerText =
             products[item].name;
@@ -169,11 +171,10 @@ window.onload = function() {
         document.getElementById("totalPrice").innerText =
             products[item].price;
 
-        document.getElementById("productLink").href =
+        document.querySelector("nav a").href =
             "product.html?item=" + item;
     }
-}
-</script>
+};
 </script>
 </body>
 </html>
