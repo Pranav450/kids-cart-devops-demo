@@ -108,17 +108,17 @@ button{
 
 <div class="item">
     <div>
-        <h2>Kids Hoodie</h2>
+        <h2 id="cartItem">Kids Hoodie</h2>
         <p>Quantity: 1</p>
     </div>
 
     <div class="price">
-        ₹999
+        <span id="cartPrice">₹999</span>
     </div>
 </div>
 
 <div class="total">
-    Total: ₹999
+    <h2>Total: <span id="totalPrice">₹999</span></h2>
 </div>
 
 <button onclick="placeOrder()">
@@ -137,6 +137,30 @@ function placeOrder(){
     document.getElementById("success").style.display = "block";
 }
 </script>
+<script>
+const params = new URLSearchParams(window.location.search);
+const item = params.get("item");
 
+const products = {
+    hoodie: {
+        name: "Kids Hoodie",
+        price: "₹999"
+    },
+    dress: {
+        name: "Girls Dress",
+        price: "₹1499"
+    },
+    shoes: {
+        name: "Kids Shoes",
+        price: "₹1999"
+    }
+};
+
+if(products[item]){
+    document.getElementById("cartItem").innerText = products[item].name;
+    document.getElementById("cartPrice").innerText = products[item].price;
+    document.getElementById("totalPrice").innerText = products[item].price;
+}
+</script>
 </body>
 </html>
