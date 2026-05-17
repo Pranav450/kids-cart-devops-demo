@@ -138,6 +138,7 @@ function placeOrder(){
 }
 </script>
 <script>
+<script>
 window.onload = function() {
 
     const params = new URLSearchParams(window.location.search);
@@ -158,15 +159,22 @@ window.onload = function() {
         }
     };
 
-    if(products[item]){
-        document.getElementById("cartItem").innerText = products[item].name;
-        document.getElementById("cartPrice").innerText = products[item].price;
-        document.getElementById("totalPrice").innerText = products[item].price;
+    if(products[item]) {
 
-        document.getElementById("productLink").href = "product.html?item=" + item;
+        document.getElementById("cartItem").innerText =
+            products[item].name;
+
+        document.getElementById("cartPrice").innerText =
+            products[item].price;
+
+        document.getElementById("totalPrice").innerText =
+            products[item].price;
+
+        document.getElementById("productLink").href =
+            "product.html?item=" + item;
     }
-
 }
+</script>
 </script>
 </body>
 </html>
