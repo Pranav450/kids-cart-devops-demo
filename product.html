@@ -101,14 +101,14 @@ button{
 <div class="container">
 
 <div class="product-img">
-<img src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=700">
+<img id="productImage" src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=700" alt="product">
 </div>
 
 <div class="details">
 
-<h1>Kids Hoodie</h1>
+<h1 id="productName">Kids Hoodie</h1>
 
-<p class="price">
+<p class="price" id="productPrice">
 ₹999
 </p>
 
@@ -130,6 +130,33 @@ Add To Cart
 </div>
 
 </div>
+<script>
+const params = new URLSearchParams(window.location.search);
+const item = params.get("item");
 
+const products = {
+    hoodie: {
+        name: "Kids Hoodie",
+        price: "₹999",
+        image: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=700"
+    },
+    dress: {
+        name: "Girls Dress",
+        price: "₹1499",
+        image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700"
+    },
+    shoes: {
+        name: "Kids Shoes",
+        price: "₹1999",
+        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700"
+    }
+};
+
+if(products[item]){
+    document.getElementById("productName").innerText = products[item].name;
+    document.getElementById("productPrice").innerText = products[item].innerText = products[item].price;
+    document.getElementById("productImage").src = products[item].image;
+}
+</script>
 </body>
 </html>
