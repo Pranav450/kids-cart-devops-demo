@@ -134,7 +134,45 @@ button{
 
 <script>
 function placeOrder(){
-    document.getElementById("success").style.display = "block";
+
+    const params = new URLSearchParams(window.location.search);
+    const item = params.get("item");
+
+    let stockKey = "";
+
+    if(item === "hoodie"){
+        stockKey = "hoodieStock";
+    }
+
+    if(item === "dress"){
+        stockKey = "dressStock";
+    }
+
+    if(item === "shoes"){
+        stockKey = "shoesStock";
+    }
+
+    let currentStock =
+        parseInt(localStorage.getItem(stockKey));
+
+    if(currentStock > 0){
+        currentStock = currentStock - 1;
+
+        localStorage.setItem(
+            stockKey,
+            currentStock
+        );
+
+        document.getElementById("success")
+            .style.display = "block";
+
+        document.getElementById("success")
+            .innerHTML =
+            "✅ Order Placed Successfully! <br><br> Inventory Updated: " +
+            (currentStock + 1) +
+            " → " +
+            currentStock;
+    }
 }
 </script>
 <script>
