@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventory - KiddoShop</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin:0;
+    background:#fff7f5;
+}
+
+nav{
+    background:white;
+    padding:20px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logo{
+    font-size:40px;
+    font-weight:bold;
+    color:#ff4f75;
+}
+
+.back-btn{
+    text-decoration:none;
+    background:#ff4f75;
+    color:white;
+    padding:12px 22px;
+    border-radius:30px;
+}
+
+.title{
+    text-align:center;
+    margin-top:40px;
+    font-size:42px;
+}
+
+.products{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+    padding:50px;
+}
+
+.card{
+    background:white;
+    width:300px;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+    text-align:center;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    width:100%;
+    height:280px;
+    object-fit:cover;
+}
+
+.card h2{
+    margin:15px 0;
+}
+
+.stock{
+    color:green;
+    font-weight:bold;
+}
+
+button{
+    margin:20px;
+    background:#ff4f75;
+    color:white;
+    border:none;
+    padding:14px 25px;
+    border-radius:30px;
+    cursor:pointer;
+    font-size:16px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">KiddoShop</div>
+
+    <a href="index.html" class="back-btn">
+        Home
+    </a>
+</nav>
+
+<h1 class="title">
+Kids Inventory
+</h1>
+
+<div class="products">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=700" alt="hoodie">
+
+<h2>Kids Hoodie</h2>
+
+<p class="stock">
+Stock Available: 100
+</p>
+
+<a href="product.html">
+<button>View Details</button>
+</a>
+</div>
+
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700" alt="dress">
+
+<h2>Girls Dress</h2>
+
+<p class="stock">
+Stock Available: 100
+</p>
+
+<a href="product.html">
+<button>View Details</button>
+</a>
+</div>
+
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700" alt="shoes">
+
+<h2>Kids Shoes</h2>
+
+<p class="stock">
+Stock Available: 100
+</p>
+
+<a href="product.html">
+<button>View Details</button>
+</a>
+</div>
+
+</div>
+
+</body>
+</html>
