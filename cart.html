@@ -97,9 +97,9 @@ button{
 <nav>
     <div class="logo">KiddoShop</div>
 
-    <a href="product.html" class="back-btn">
-        Product
-    </a>
+    <a id="productLink" href="product.html">
+    Product
+</a>
 </nav>
 
 <div class="container">
@@ -180,6 +180,8 @@ window.onload = function() {
         document.getElementById("cartItem").innerText = products[item].name;
         document.getElementById("cartPrice").innerText = products[item].price;
         document.getElementById("totalPrice").innerText = products[item].price;
+
+        document.getElementById("productLink").href = "product.html?item=" + item;
     }
 
 }
