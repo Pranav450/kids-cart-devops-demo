@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard - KiddoShop</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#f8f0ef;
+        }
+
+        nav{
+            background:white;
+            padding:25px 60px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            box-shadow:0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo{
+            font-size:55px;
+            font-weight:bold;
+            color:#ff4f78;
+        }
+
+        .nav-btn{
+            background:#ff4f78;
+            color:white;
+            padding:15px 35px;
+            border-radius:40px;
+            text-decoration:none;
+            font-size:24px;
+        }
+
+        .container{
+            width:85%;
+            margin:50px auto;
+        }
+
+        h1{
+            text-align:center;
+            font-size:55px;
+            margin-bottom:40px;
+        }
+
+        .dashboard-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:30px;
+        }
+
+        .card{
+            background:white;
+            border-radius:20px;
+            padding:30px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.1);
+            text-align:center;
+        }
+
+        .card h2{
+            font-size:35px;
+            margin-bottom:20px;
+        }
+
+        .stock{
+            color:green;
+            font-size:32px;
+            font-weight:bold;
+        }
+
+        .status-box{
+            background:white;
+            margin-top:40px;
+            border-radius:20px;
+            padding:35px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .status-box h2{
+            margin-bottom:20px;
+            font-size:40px;
+        }
+
+        .status-item{
+            font-size:28px;
+            margin:15px 0;
+        }
+
+        .running{
+            color:green;
+            font-weight:bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">KiddoShop</div>
+
+    <a class="nav-btn" href="inventory.html">
+        Inventory
+    </a>
+</nav>
+
+<div class="container">
+
+    <h1>Admin Dashboard</h1>
+
+    <div class="dashboard-grid">
+
+        <div class="card">
+            <h2>Kids Hoodie</h2>
+            <p class="stock" id="hoodieStock">
+                100
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Girls Dress</h2>
+            <p class="stock" id="dressStock">
+                100
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Kids Shoes</h2>
+            <p class="stock" id="shoesStock">
+                100
+            </p>
+        </div>
+
+    </div>
+
+    <div class="status-box">
+
+        <h2>System Monitoring</h2>
+
+        <p class="status-item">
+            Inventory Service:
+            <span class="running">
+                Running ✅
+            </span>
+        </p>
+
+        <p class="status-item">
+            Website Deployment:
+            <span class="running">
+                GitHub Pages Active ✅
+            </span>
+        </p>
+
+        <p class="status-item">
+            CI/CD Pipeline:
+            <span class="running">
+                GitHub Actions Running ✅
+            </span>
+        </p>
+
+        <p class="status-item">
+            Environment:
+            <span class="running">
+                Production ✅
+            </span>
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+
+window.onload = function(){
+
+    document.getElementById("hoodieStock")
+        .innerText =
+        localStorage.getItem("hoodieStock");
+
+    document.getElementById("dressStock")
+        .innerText =
+        localStorage.getItem("dressStock");
+
+    document.getElementById("shoesStock")
+        .innerText =
+        localStorage.getItem("shoesStock");
+};
+
+</script>
+
+</body>
+</html>
