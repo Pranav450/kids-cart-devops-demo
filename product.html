@@ -121,10 +121,8 @@ Premium kids hoodie with soft fabric, stylish look,
 comfortable fit and perfect design for all seasons.
 </p>
 
-<a href="cart.html">
-<button>
-Add To Cart
-</button>
+<a id="cartLink" href="cart.html">
+<button>Add To Cart</button>
 </a>
 
 </div>
@@ -154,8 +152,10 @@ const products = {
 
 if(products[item]){
     document.getElementById("productName").innerText = products[item].name;
-    document.getElementById("productPrice").innerText = products[item].innerText = products[item].price;
+    document.getElementById("productPrice").innerText = products[item].price;
     document.getElementById("productImage").src = products[item].image;
+
+    document.getElementById("cartLink").href = "cart.html?item=" + item;
 }
 </script>
 </body>
