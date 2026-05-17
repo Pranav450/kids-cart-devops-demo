@@ -152,6 +152,34 @@ Stock Available: 100
 </div>
 
 </div>
+<script>
+window.onload = function () {
 
+    // Default inventory
+    if (!localStorage.getItem("hoodieStock")) {
+        localStorage.setItem("hoodieStock", "100");
+    }
+
+    if (!localStorage.getItem("dressStock")) {
+        localStorage.setItem("dressStock", "100");
+    }
+
+    if (!localStorage.getItem("shoesStock")) {
+        localStorage.setItem("shoesStock", "100");
+    }
+
+    // Update stock on inventory page
+    const stockElements = document.querySelectorAll(".stock");
+
+    stockElements[0].innerText =
+        "Stock Available: " + localStorage.getItem("hoodieStock");
+
+    stockElements[1].innerText =
+        "Stock Available: " + localStorage.getItem("dressStock");
+
+    stockElements[2].innerText =
+        "Stock Available: " + localStorage.getItem("shoesStock");
+};
+</script>
 </body>
 </html>
