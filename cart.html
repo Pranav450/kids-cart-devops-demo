@@ -134,88 +134,82 @@ button{
 </div>
 
 </div>
-
 <script>
-function placeOrder(){
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
 
-    const params = new URLSearchParams(window.location.search);
-    const item = params.get("item");
+let currentProduct = null;
 
-    let stockKey = "";
+async function loadCart() {
 
-    if(item === "hoodie"){
-        stockKey = "hoodieStock";
-    }
+    const response = await fetch(
+        "https://kids-cart-backend.onrender.com/products"
+    );
 
-    if(item === "dress"){
-        stockKey = "dressStock";
-    }
+    const products = await response.json();
 
-    if(item === "shoes"){
-        stockKey = "shoesStock";
-    }
+    currentProduct =
+        products.find(p => p._id === id);
 
-    let currentStock =
-        parseInt(localStorage.getItem(stockKey));
-
-    if(currentStock > 0){
-        currentStock = currentStock - 1;
-
-        localStorage.setItem(
-            stockKey,
-            currentStock
-        );
-
-        document.getElementById("success")
-            .style.display = "block";
-
-        document.getElementById("success")
+    if (!currentProduct) {
+        document.querySelector(".container")
             .innerHTML =
-            "✅ Order Placed Successfully! <br><br> Inventory Updated: " +
-            (currentStock + 1) +
-            " → " +
-            currentStock;
+            "<h1>Product Not Found</h1>";
+        return;
     }
+
+    // Update UI
+    document.getElementById("cartItem")
+        .innerText = currentProduct.name;
+
+    document.getElementById("cartPrice")
+        .innerText =
+        "₹" + currentProduct.price;
+
+    document.getElementById("totalPrice")
+        .innerText =
+        "₹" + currentProduct.price;
+
+    // Back button
+    document.getElementById("productLink")
+        .href =
+        "product.html?id=" +
+        currentProduct._id;
 }
-</script>
-<script>
-window.onload = function () {
 
-    const params = new URLSearchParams(window.location.search);
-    const item = params.get("item");
+async function placeOrder() {
 
-    const products = {
-        hoodie: {
-            name: "Kids Hoodie",
-            price: "₹999"
-        },
-
-        dress: {
-            name: "Girls Dress",
-            price: "₹1499"
-        },
-
-        shoes: {
-            name: "Kids Shoes",
-            price: "₹1999"
+    const response = await fetch(
+        "https://kids-cart-backend.onrender.com/order",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type":
+                "application/json"
+            },
+            body: JSON.stringify({
+                item: currentProduct.name
+            })
         }
-    };
+    );
 
-    if (products[item]) {
+    const data = await response.json();
 
-        document.getElementById("cartItem").innerText =
-            products[item].name;
+    document.getElementById("success")
+        .style.display = "block";
 
-        document.getElementById("cartPrice").innerText =
-            products[item].price;
+    document.getElementById("success")
+        .innerHTML =
+        "✅ Order Placed Successfully!";
 
-        document.getElementById("totalPrice").innerText =
-            products[item].price;
+    setTimeout(() => {
+        window.location.href =
+            "inventory.html";
+    }, 1500);
+}
 
-        document.querySelector("nav a").href =
-            "product.html?item=" + item;
-    }
-};
+loadCart();
 </script>
+
 </body>
 </html>
