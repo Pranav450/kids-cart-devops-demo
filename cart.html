@@ -141,71 +141,82 @@ const id = params.get("id");
 let currentProduct = null;
 
 async function loadCart() {
+    try {
 
-    const response = await fetch(
-        "https://kids-cart-backend.onrender.com/products"
-    );
+        const response = await fetch(
+            "https://kids-cart-backend.onrender.com/products"
+        );
 
-    const products = await response.json();
+        const products = await response.json();
 
-    currentProduct =
-        products.find(p => p._id === id);
+        currentProduct =
+            products.find(p => p._id === id);
 
-    if (!currentProduct) {
-        document.querySelector(".container")
-            .innerHTML =
-            "<h1>Product Not Found</h1>";
-        return;
+        if (!currentProduct) {
+            document.querySelector(".container")
+                .innerHTML =
+                "<h1>Product Not Found</h1>";
+            return;
+        }
+
+        // update cart UI
+        document.getElementById("cartItem")
+            .innerText = currentProduct.name;
+
+        document.getElementById("cartPrice")
+            .innerText =
+            "₹" + currentProduct.price;
+
+        document.getElementById("totalPrice")
+            .innerText =
+            "₹" + currentProduct.price;
+
+        // fix product button
+        document.getElementById("productLink")
+            .href =
+            "product.html?id=" +
+            currentProduct._id;
+
+    } catch (error) {
+        console.log(error);
+        alert("Failed to load product");
     }
-
-    // Update UI
-    document.getElementById("cartItem")
-        .innerText = currentProduct.name;
-
-    document.getElementById("cartPrice")
-        .innerText =
-        "₹" + currentProduct.price;
-
-    document.getElementById("totalPrice")
-        .innerText =
-        "₹" + currentProduct.price;
-
-    // Back button
-    document.getElementById("productLink")
-        .href =
-        "product.html?id=" +
-        currentProduct._id;
 }
 
 async function placeOrder() {
 
-    const response = await fetch(
-        "https://kids-cart-backend.onrender.com/order",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type":
-                "application/json"
-            },
-            body: JSON.stringify({
-                item: currentProduct.name
-            })
-        }
-    );
+    if (!currentProduct) {
+        alert("Product not loaded");
+        return;
+    }
 
-    const data = await response.json();
+    try {
 
-    document.getElementById("success")
-        .style.display = "block";
+        const response = await fetch(
+            "https://kids-cart-backend.onrender.com/order",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type":
+                    "application/json"
+                },
+                body: JSON.stringify({
+                    item: currentProduct.name
+                })
+            }
+        );
 
-    document.getElementById("success")
-        .innerHTML =
-        "✅ Order Placed Successfully!";
+        const data = await response.json();
 
-    setTimeout(() => {
+        alert(data.message || "Order Placed!");
+
         window.location.href =
             "inventory.html";
-    }, 1500);
+
+    } catch (error) {
+        console.log(error);
+        alert("Order failed");
+    }
 }
 
 loadCart();
